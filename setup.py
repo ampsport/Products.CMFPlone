@@ -1,22 +1,24 @@
 from setuptools import setup, find_packages
 import os.path
 
-version = '4.3.3.dev0'
+version = '4.3.4.dev0'
 
 setup(name='Products.CMFPlone',
       version=version,
       description="The Plone Content Management System (core)",
-      long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "CHANGES.rst")).read(),
+      long_description=(
+          open("README.rst").read() + "\n" +
+          open(os.path.join("docs", "CHANGES.rst")).read()
+      ),
       classifiers=[
-        "Environment :: Web Environment",
-        "Framework :: Plone",
-        "Framework :: Zope2",
-        "License :: OSI Approved :: GNU General Public License (GPL)",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python",
-        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-        ],
+          "Environment :: Web Environment",
+          "Framework :: Plone",
+          "Framework :: Zope2",
+          "License :: OSI Approved :: GNU General Public License (GPL)",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python",
+          "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+      ],
       keywords='Plone CMF python Zope',
       author='Plone Foundation',
       author_email='plone-developers@lists.sourceforge.net',
@@ -27,13 +29,15 @@ setup(name='Products.CMFPlone',
       include_package_data=True,
       zip_safe=False,
       extras_require=dict(
-        test=[
-          'Products.PloneTestCase',
-          'zope.globalrequest',
-          'zope.testing',
-          'plone.app.testing',
-          'plone.app.robotframework',
-        ]),
+          test=[
+              'Products.PloneTestCase',
+              'Products.CMFTestCase',
+              'zope.globalrequest',
+              'zope.testing',
+              'plone.app.testing',
+              'plone.app.robotframework',
+          ]
+      ),
       install_requires=[
           'setuptools',
           'Acquisition',
@@ -86,7 +90,7 @@ setup(name='Products.CMFPlone',
           'plone.app.folder',
           'plone.app.form',
           'plone.app.i18n',
-          'plone.app.jquery',
+          'plone.app.jquery>=1.7.2',
           'plone.app.jquerytools',
           'plone.app.layout >=1.1.7dev-r23744',
           'plone.app.linkintegrity >=1.0.3',

@@ -5,12 +5,128 @@
 Changelog
 =========
 
-4.3.3 (unreleased)
+4.3.4 (unreleased)
 ------------------
+
+- folder_position script: make position and id optional.  Default
+  position to 'ordered' and id to None, which means: do nothing.
+  plone.folder 1.0.5 allows this, making it possible to simply reverse
+  the current sort order by using reverse=False.
+  [maurits]
+
+- Abstract the search form and livesearch action URLs making it easier to
+  extend the search portlet with custom views or other actions.
+  [rpatterson]
+
+- Declare minimum plone.app.jquery dependency (1.7.2) in setup.py.
+  [thet]
+
+- Fix JavaScript to work with recent jQuery (>= 1.9) versions.
+  [thet]
+
+- Improve event_view - do not show time when user specifies the same start and 
+  end time for an event.
+  [spereverde]
+
+- Fix for https://dev.plone.org/ticket/13603 would break with VHM.
+  [spereverde, jakke, jfroche]
+
+- Strip leading & trailing spaces from id and title in rename-form.
+  See https://dev.plone.org/ticket/12998, https://dev.plone.org/ticket/12989,
+  https://dev.plone.org/ticket/9370, https://dev.plone.org/ticket/8338
+  [pbauer]
+
+- Add 'warning' and 'error' status message types to the test_rendering
+  view.
+  [esteele]
+
+- In plone-overview view, we can now see Plone sites which are contained into
+  Zope folder.
+  [bsuttor]
+
+- Fixed plone.css and plone.session integration. Do not break when not found
+  resources are registered in the portal_css tool
+  [keul]
+
+4.3.3 (2014-02-19)
+------------------
+- Fix incorrect use of dict get method in CatalogTool.search, introduced by
+  PloneHotfix20131210 (issue 195)
+  [fulv]
+
+- Change default permission for sendto_form to Authenticated instead of
+  Anonymous
+  [vangheem]
+
+- merge hotfixes from https://pypi.python.org/pypi/Products.PloneHotfix20131210
+  [vangheem]
+
+- handle plone.app.textfield RichTextValue objects in syndication. Should
+  fix syndication with plone.app.contenttypes.
+  [vangheem]
+
+- FolderFeed adapter now takes into account the limit property when displaying
+  the RSS feed just like the other adapters do
+  [ichim-david]
+
+- Fix handling of URL fragments in form_tabbing.js.
+  [davisagli]
+
+- Password reset emails will now be sent from the navigation root instead
+  the portal, enabling support for multilingual sites and other subsites
+  to keep the correct language, title, menus and designs.
+  [regebro]
+
+- Fix issue where a user could delete unintended object through
+  acquisition magic. See https://dev.plone.org/ticket/13603.
+  [gotcha]
+
+- Added a method toLocalizedSize to @@plone view,
+  on the model of toLocalizedTime,
+  to get a localized string rendering a size from an integer.
+  Use it on image view.
+  [thomasdesvenain]
+
+- Remove plone_deprecated/sitemap.pt to avoid sitemap traceback because we
+  don't have a @@sitemap_view view anymore when you enable back
+  the plone_deprecated skin layer.
+  [vincentfretin]
+
+- Inline validation JavaScript for z3c.form only sends request when
+  field name can be obtained from DOM for a widget (#13741).
+  [seanupton]
+
+- Fix problem generating feeds including Dexterity items with no primary field.
+  [bloodbare]
+
+- recently_modified and recently_published respects allow anonymous to view
+  about setting
+  [vangheem]
 
 - Return a 404 instead of "AttributeError: (dynamic view)" if a user attempts to
   view a still-temporary PortalFactory item.
   [esteele]
+
+- Ensure that initial_login is set to True when a user first logs in.
+  [taito]
+
+- No longer set news, events and member folder to be unordered
+  [vangheem]
+
+- Fix calendar ajax next and prev buttons
+  [vangheem]
+
+- Ensure ``object_rename`` script has ``_`` message factory available
+  to prevent error when unauthorized.
+  [davidjb]
+
+- Fix issue with the search js in sharing page where the user needed to check
+  twice a checkbox to assign a role after a search.
+  [vincentfretin]
+
+- Catch missing userid on mail_password form, and treat is as
+  an empty userid. That way the user gets a helpful message.
+  [do3cc]
 
 
 4.3.2 (2013-08-14)

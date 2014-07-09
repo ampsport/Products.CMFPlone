@@ -350,7 +350,6 @@ class WorkflowTool(PloneBaseTool, BaseTool):
                     actions.extend(a)
         return actions
 
-
 WorkflowTool.__doc__ = BaseTool.__doc__
 
 InitializeClass(WorkflowTool)

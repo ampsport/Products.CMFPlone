@@ -23,18 +23,6 @@ function refreshPortlet(hash, _options){
     $.ajax(ajaxOptions);
 }
 
-/* Calendar Portlet KSS Replacement */
-$('body').delegate('#calendar-next,#calendar-previous', 'click', function(){
-    var el = $(this);
-    var container = el.parents('.portletWrapper');
-    refreshPortlet(container.data('portlethash'), {
-        data: {
-            month: el.data('month'),
-            year: el.data('year')
-        }
-    });
-    return false;
-});
 
 /* apply a refresh timeout to a portlet */
 function applyPortletTimeout(portlet){
@@ -63,6 +51,20 @@ $(document).ready(function(){
     $(document).ajaxStart(function() { spinner.show(); });
     $(document).ajaxStop(function() { spinner.hide(); });
 
+    /* Calendar Portlet KSS Replacement */
+    $('body').delegate('#calendar-next,#calendar-previous', 'click', function(e){
+        e.preventDefault();
+        var el = $(this);
+        var container = el.parents('.portletWrapper');
+        refreshPortlet(container.data('portlethash'), {
+            data: {
+                month: el.data('month'),
+                year: el.data('year')
+            }
+        });
+        return false;
+    });
+
     /* Any portlets with the class kssPortletRefresh(deprecated)
        or refreshPortlet will automatically be refreshed with this.
        Data attribute timeout(data-timeout) will be used to override
@@ -87,7 +89,7 @@ $(document).ready(function(){
 
     /* sharing search form */
     var search_timeout = null;
-    $('#content-core').delegate('#sharing-user-group-search', 'change input', function(){
+    $('#content-core').delegate('#sharing-user-group-search', 'input', function(){
         var text = $(this);
         if(search_timeout != null){
             clearTimeout(search_timeout);
