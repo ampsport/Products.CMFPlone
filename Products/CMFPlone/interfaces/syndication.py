@@ -7,6 +7,10 @@ class ISyndicatable(Interface):
     pass
 
 
+class INewsMLSyndicatable(Interface):
+    pass
+
+
 class IFeedData(Interface):
     def link():
         """
@@ -146,6 +150,18 @@ class IFeedItem(IFeedData):
         """
 
 
+class INewsMLFeed(Interface):
+    def _brains():
+        """
+        return list of brains
+        """
+
+    def _items():
+        """
+        return full objects
+        """
+
+
 class ISiteSyndicationSettings(Interface):
 
     allowed = schema.Bool(
@@ -216,6 +232,15 @@ class ISiteSyndicationSettings(Interface):
         title=_(u"Show Feed Link"),
         description=_(u"Enable RSS link document action on the syndication "
                       u"content item."))
+
+    newsml_enabled_types = schema.Tuple(
+        title=_(u'NewsML enabled types'),
+        description=_(u'Content types that allow NewsML syndication.'),
+        required=False,
+        default=('News Item',),
+        value_type=schema.Choice(
+            vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes")
+    )
 
 
 class IFeedSettings(Interface):
